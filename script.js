@@ -47,9 +47,18 @@ var availIndexes = updateAvailIndexes()
 
 updateColors()
 
+// make web page able to listen to keydown event
 document.addEventListener('keydown', moveBlocks)
 
+// method to extract columns from an 2D array.
+const arrayColumn = (arr, n) => arr.map((x) => x[n]);
+
 function moveBlocks(e){
+
+    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight' && e.key !== 'ArrowUp' && e.key !== 'ArrowDown'){
+        return
+    }
+
     moves++;
     matrixVals = getCurrentMatrixValues();
     prevMatrix = matrixVals;
@@ -92,8 +101,9 @@ function moveBlocks(e){
     availIndexes = updateAvailIndexes()
     updateColors()
 
+    let check = checkMatrixEquality(prevMatrix, matrixVals)
     
-    if (availIndexes.length === 0){
+    if (availIndexes.length === 0 && check){
         gameOver('loose')
     }
 
@@ -105,7 +115,7 @@ function moveBlocks(e){
 setInterval(()=>{
     availIndexes = updateAvailIndexes()
     generateNewBlock()
-}, 10000)
+}, 8000)
 
 setTimeout(()=>{
     options.push(16)
@@ -121,7 +131,6 @@ setTimeout(()=>{
     }, 18000)
 }, 120000)
 
-const arrayColumn = (arr, n) => arr.map((x) => x[n]);
 
 function getCurrentMatrixValues(){
     let gridItems = [...document.querySelectorAll('.grid-item')];
@@ -242,10 +251,20 @@ function generateNewBlock(){
     let coords = availIndexes[randInt];
     let randInt3 = Math.floor(Math.random() * options.length)
     let ele = matrix[coords[0]][coords[1]].firstElementChild
-    if (ele.innerText == ''){
-        ele.innerText = options[randInt3]
-    } 
+    ele.innerText = options[randInt3]
     updateColors()
+}
+
+function checkMatrixEquality(mat1, mat2){
+    for (let i = 0; i < mat1.length; i++){
+        for (let j = 0; i < mat1.length[0]; j++){
+            if (mat1[i][j] !== mat2[i][j]){
+                return false;
+            } else{
+                return true;
+            }
+        }
+    }
 }
 
 function gameOver(status){
@@ -264,55 +283,54 @@ function updateColors(){
             let elem = matrix[i][j].firstElementChild
             let id = elem.getAttribute('id')
             id = ""+id
-            let e = document.getElementById(id)
+            // let e = document.getElementById(id)
             if (elem.innerText == 0){
-                e.parentElement.style.backgroundColor = colors[0]
-                e.style.color = 'black'
+                elem.parentElement.style.backgroundColor = colors[0]
+                elem.style.color = 'black'
             }
             else if (elem.innerText == 2){
-                e.style.color = 'black'
-                e.parentElement.style.backgroundColor = colors[1]
+                elem.style.color = 'black'
+                elem.parentElement.style.backgroundColor = colors[1]
             } 
             else if (elem.innerText == 4){
-                e.style.color = 'black'
-                e.parentElement.style.backgroundColor = colors[2]
+                elem.style.color = 'black'
+                elem.parentElement.style.backgroundColor = colors[2]
             } 
             else if (elem.innerText == 8){
-                e.style.color = 'black'
-                e.parentElement.style.backgroundColor = colors[3]
+                elem.style.color = 'black'
+                elem.parentElement.style.backgroundColor = colors[3]
             } 
             else if (elem.innerText == 16){
-                e.style.color = 'white'
-                e.parentElement.style.backgroundColor = colors[4]
+                elem.style.color = 'white'
+                elem.parentElement.style.backgroundColor = colors[4]
             }
             else if (elem.innerText == 32){
-                e.style.color = 'white'
-                e.parentElement.style.backgroundColor = colors[5]
+                elem.style.color = 'white'
+                elem.parentElement.style.backgroundColor = colors[5]
             }
             else if (elem.innerText == 64){
-                e.style.color = 'white'
-                e.parentElement.style.backgroundColor = colors[6]
+                elem.style.color = 'white'
+                elem.parentElement.style.backgroundColor = colors[6]
             }
             else if (elem.innerText == 128){
-                e.style.color = 'white'
-                e.parentElement.style.backgroundColor = colors[7]
+                elem.style.color = 'white'
+                elem.parentElement.style.backgroundColor = colors[7]
             }
             else if (elem.innerText == 256){
-                e.style.color = 'white'
-                e.parentElement.style.backgroundColor = colors[8]
+                elem.style.color = 'white'
+                elem.parentElement.style.backgroundColor = colors[8]
             }
             else if (elem.innerText == 512){
-                e.style.color = 'white'
-                e.parentElement.style.backgroundColor = colors[9]
+                elem.style.color = 'white'
+                elem.parentElement.style.backgroundColor = colors[9]
             }
             else if (elem.innerText == 1024){
-                e.style.color = 'white'
-                e.parentElement.style.backgroundColor = colors[10]
+                elem.style.color = 'white'
+                elem.parentElement.style.backgroundColor = colors[10]
             }
             else if (elem.innerText == 2048){
-                e.style.color = 'white'
-                e.parentElement.style.backgroundColor = colors[11]
-                // e.style.backgroundColor = 'rgb(172, 215, 250)'
+                elem.style.color = 'white'
+                elem.parentElement.style.backgroundColor = colors[11]
             }
         }   
     }
