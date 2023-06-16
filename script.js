@@ -102,8 +102,8 @@ function moveBlocks(e){
     updateColors()
 
     let check = checkMatrixEquality(prevMatrix, matrixVals)
-    
-    if (availIndexes.length === 0 && check){
+
+    if (availIndexes.length === 0 && check === true){
         gameOver('loose')
     }
 
@@ -150,17 +150,35 @@ function getCurrentMatrixValues(){
     return matrix_grid
 }
 
-function moveRight(row){
+function shiftLeft(arr){
+    for (let i = 0; i < 4; i++) {
+        for (let i = 1; i < 4; i++) {
+            let currElement = arr[i].firstElementChild
+            let prevElement = arr[i-1].firstElementChild
+            if (prevElement.innerText == 0){
+                prevElement.innerText = currElement.innerText
+                currElement.innerText = ''
+            }
+        }
+    }
+}
+
+function shiftRight(arr){
     for (let i = 0; i < 4; i++) {
         for (let i = 2; i >= 0; i--) {
-            let currElement = row[i].firstElementChild
-            let nextElement = row[i+1].firstElementChild
+            let currElement = arr[i].firstElementChild
+            let nextElement = arr[i+1].firstElementChild
             if (nextElement.innerText == 0){
                 nextElement.innerText = currElement.innerText
                 currElement.innerText = ''
             }
         }
     }
+}
+
+function moveRight(row){
+    
+    shiftRight(row)
 
     for (let i = 2; i >= 0; i--) {
         let currElement = row[i].firstElementChild
@@ -179,30 +197,13 @@ function moveRight(row){
         }    
     }
 
-    for (let i = 0; i < 4; i++) {
-        for (let i = 2; i >= 0; i--) {
-            let currElement = row[i].firstElementChild
-            let nextElement = row[i+1].firstElementChild
-            if (nextElement.innerText == 0){
-                nextElement.innerText = currElement.innerText
-                currElement.innerText = ''
-            }
-        }
-    }
+    shiftRight(row)
 
 }
 
 function moveLeft(row){
-    for (let i = 0; i < 4; i++) {
-        for (let i = 1; i < 4; i++) {
-            let currElement = row[i].firstElementChild
-            let prevElement = row[i-1].firstElementChild
-            if (prevElement.innerText == 0){
-                prevElement.innerText = currElement.innerText
-                currElement.innerText = ''
-            }
-        }
-    }
+
+    shiftLeft(row)
 
     for (let i = 1; i < 4; i++) {
         let currElement = row[i].firstElementChild
@@ -221,16 +222,7 @@ function moveLeft(row){
         }  
     }
 
-    for (let i = 0; i < 4; i++) {
-        for (let i = 1; i < 4; i++) {
-            let currElement = row[i].firstElementChild
-            let prevElement = row[i-1].firstElementChild
-            if (prevElement.innerText == 0){
-                prevElement.innerText = currElement.innerText
-                currElement.innerText = ''
-            }
-        }
-    }
+    shiftLeft(row)
 }
 
 function updateAvailIndexes(){
@@ -247,24 +239,25 @@ function updateAvailIndexes(){
 }
 
 function generateNewBlock(){
-    let randInt = Math.floor(Math.random() * availIndexes.length)
-    let coords = availIndexes[randInt];
-    let randInt3 = Math.floor(Math.random() * options.length)
-    let ele = matrix[coords[0]][coords[1]].firstElementChild
-    ele.innerText = options[randInt3]
-    updateColors()
+    if (availIndexes.length !== 0){
+        let randInt = Math.floor(Math.random() * availIndexes.length)
+        let coords = availIndexes[randInt];
+        let randInt3 = Math.floor(Math.random() * options.length)
+        let ele = matrix[coords[0]][coords[1]].firstElementChild
+        ele.innerText = options[randInt3]
+        updateColors()
+    }
 }
 
 function checkMatrixEquality(mat1, mat2){
-    for (let i = 0; i < mat1.length; i++){
-        for (let j = 0; i < mat1.length[0]; j++){
+    for (let i = 0; i < 4; i++){
+        for (let j = 0; j < 4; j++){
             if (mat1[i][j] !== mat2[i][j]){
                 return false;
-            } else{
-                return true;
             }
         }
     }
+    return true
 }
 
 function gameOver(status){
@@ -281,9 +274,6 @@ function updateColors(){
     for (let i = 0; i < 4; i++) {
         for (let j = 0; j < 4; j++) {
             let elem = matrix[i][j].firstElementChild
-            let id = elem.getAttribute('id')
-            id = ""+id
-            // let e = document.getElementById(id)
             if (elem.innerText == 0){
                 elem.parentElement.style.backgroundColor = colors[0]
                 elem.style.color = 'black'
