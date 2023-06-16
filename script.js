@@ -8,6 +8,7 @@ var moveFactor = 4
 var options = [2, 4, 8, 2, 4, 8, 2, 2, 4, 4, 2, 8, 2, 2, 4, 4, 2];
 var matrix = [];
 var prevMatrix;
+var currentMatrixValues;
 
 var colors = ['#caf0f8', '#90e0ef', '#00b4d8', '#0077b6', '#03045e', '#023047', 
     '#fca311', '#14213d', '#e63946', '#ffc300', '#6a040f', '#000000']
@@ -53,36 +54,35 @@ document.addEventListener('keydown', moveBlocks)
 // method to extract columns from an 2D array.
 const arrayColumn = (arr, n) => arr.map((x) => x[n]);
 
+// define the event listener
 function moveBlocks(e){
 
+    // if pressed key is not arrow key, return
     if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight' && e.key !== 'ArrowUp' && e.key !== 'ArrowDown'){
         return
     }
 
+    // otherwise, move forward.
     moves++;
-    matrixVals = getCurrentMatrixValues();
-    prevMatrix = matrixVals;
+    currentMatrixValues = getCurrentMatrixValues();
+    prevMatrix = currentMatrixValues;
 
     let col1 = arrayColumn(matrix, 0);
     let col2 = arrayColumn(matrix, 1);
     let col3 = arrayColumn(matrix, 2);
     let col4 = arrayColumn(matrix, 3);
-    let row1 = matrix[0]
-    let row2 = matrix[1]
-    let row3 = matrix[2]
-    let row4 = matrix[3]
 
     if (e.key === 'ArrowLeft'){
-        moveLeft(row1)
-        moveLeft(row2)
-        moveLeft(row3)
-        moveLeft(row4)
+        moveLeft(matrix[0]) // row 1
+        moveLeft(matrix[1]) // row 2
+        moveLeft(matrix[2]) // row 3
+        moveLeft(matrix[3]) // row 4
     }
     if (e.key === 'ArrowRight'){
-        moveRight(row1)
-        moveRight(row2)
-        moveRight(row3)
-        moveRight(row4)
+        moveRight(matrix[0]) // row 1
+        moveRight(matrix[1]) // row 2
+        moveRight(matrix[2]) // row 3
+        moveRight(matrix[3]) // row 4
     }
     if (e.key === 'ArrowUp'){
         moveLeft(col1)
@@ -97,42 +97,63 @@ function moveBlocks(e){
         moveRight(col4)
     }
 
-    matrixVals = getCurrentMatrixValues()
-    availIndexes = updateAvailIndexes()
-    updateColors()
+    currentMatrixValues = getCurrentMatrixValues();
+    availIndexes = updateAvailIndexes();
+    updateColors();
 
-    let check = checkMatrixEquality(prevMatrix, matrixVals)
+    let check = checkMatrixEquality(prevMatrix, currentMatrixValues);
 
     if (availIndexes.length === 0 && check === true){
-        gameOver('loose')
+        gameOver('loose');
     }
 
     if (moves % moveFactor === 0){
-        generateNewBlock()
+        generateNewBlock();
     }
 }
 
+// make sure that a new block is generate after every 8th second
 setInterval(()=>{
-    availIndexes = updateAvailIndexes()
-    generateNewBlock()
+    availIndexes = updateAvailIndexes();
+    generateNewBlock();
 }, 8000)
 
+// after 12 s update options
+setTimeout(()=>{
+    options.push(8)
+    options.push(16)
+}, 12000)
+
+// after 22 s update options
 setTimeout(()=>{
     options.push(16)
-    setTimeout(()=>{
-        options.push(16)
-        options.push(32)
-        setTimeout(()=>{
-            options.push(16)
-            options.push(32)
-            options.push(64)
-        }, 40000)
+    options.push(32)
+}, 22000)
 
-    }, 18000)
-}, 120000)
+// after 30 s update options
+setTimeout(()=>{
+    options.push(16)
+    options.push(32)
+    options.push(64)
+}, 30000)
 
+// get the available empty indexes
+function updateAvailIndexes(){
+    matrixValues = getCurrentMatrixValues()
+    let grid = []
+    for (let i = 0; i < 4; i++) {
+        for (let j = 0; j < 4; j++) {
+            if (matrixValues[i][j] == ''){
+                grid.push([i, j])
+            }
+        }
+    }
+    return grid;
+}
 
+// get the current values of the matrix
 function getCurrentMatrixValues(){
+    // to convert node list to JS array, use destructuring.
     let gridItems = [...document.querySelectorAll('.grid-item')];
     let matrix_grid = []
     let row = []
@@ -150,6 +171,8 @@ function getCurrentMatrixValues(){
     return matrix_grid
 }
 
+
+// method to move elements of an array to left
 function shiftLeft(arr){
     for (let i = 0; i < 4; i++) {
         for (let i = 1; i < 4; i++) {
@@ -163,6 +186,7 @@ function shiftLeft(arr){
     }
 }
 
+// method to move elements of an array to right
 function shiftRight(arr){
     for (let i = 0; i < 4; i++) {
         for (let i = 2; i >= 0; i--) {
@@ -176,6 +200,7 @@ function shiftRight(arr){
     }
 }
 
+// method to move element to right while summing them up
 function moveRight(row){
     
     shiftRight(row)
@@ -201,6 +226,8 @@ function moveRight(row){
 
 }
 
+
+// method to move element to left while summing them up
 function moveLeft(row){
 
     shiftLeft(row)
@@ -225,19 +252,7 @@ function moveLeft(row){
     shiftLeft(row)
 }
 
-function updateAvailIndexes(){
-    matrixValues = getCurrentMatrixValues()
-    let grid = []
-    for (let i = 0; i < 4; i++) {
-        for (let j = 0; j < 4; j++) {
-            if (matrixValues[i][j] == ''){
-                grid.push([i, j])
-            }
-        }
-    }
-    return grid;
-}
-
+// generate a new block, i.e., assign a random value from options to one of the available blocks
 function generateNewBlock(){
     if (availIndexes.length !== 0){
         let randInt = Math.floor(Math.random() * availIndexes.length)
@@ -249,6 +264,7 @@ function generateNewBlock(){
     }
 }
 
+// check if two matrices are equal or not.
 function checkMatrixEquality(mat1, mat2){
     for (let i = 0; i < 4; i++){
         for (let j = 0; j < 4; j++){
@@ -260,6 +276,7 @@ function checkMatrixEquality(mat1, mat2){
     return true
 }
 
+// update text content of result sections and show game over with its condition
 function gameOver(status){
     if (status === 'Win'){
         result.innerText = 'You Won!!!';
@@ -270,6 +287,7 @@ function gameOver(status){
     }
 }
 
+// update colors of the blocks of the grid based on the text content
 function updateColors(){
     for (let i = 0; i < 4; i++) {
         for (let j = 0; j < 4; j++) {
