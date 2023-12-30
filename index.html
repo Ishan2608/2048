@@ -14,66 +14,99 @@
 
 </head>
 <body>
+    <div class="main-container">
+        <div class="left-column">
+            <h1>
+                Instructions
+            </h1>
+            <p>
+                <ul class="instructions">
+                    <li class="instruction-point">
+                        Use the arrow key to move all the cells Up, Down, Right, and Left.
 
-    <div class="container">
-        <div class="score">
-            <p class="score-title">Score: </p>
-            <p class="score-value">0</p>
+                    </li>
+                    <li class="instruction-point">
+                        When cells move in a direction and the sibling cells in in that direction have same value in them. They add up.
+
+                    </li>
+                    <li class="instruction-point">
+                        Try to reach the number 2048 to win the game.
+
+                    </li>
+                    <li class="instruction-point">
+                        A new block is created every 8 seconds.
+
+                    </li>
+                </ul>
+            </p>
         </div>
-        
-        <div class="result"></div>
-        
-        <div class="grid">
-            <div class="grid-item">
-                <p id="1"></p>
+
+        <div class="right-column">
+
+            <!-- Headers of the Game -->
+            <div class="score">
+                <p class="score-title">Score: </p>
+                <p class="score-value">0</p>
             </div>
-            <div class="grid-item">
-                <p id="2"></p>
-            </div>
-            <div class="grid-item">
-                <p id="3"></p>
-            </div>
-            <div class="grid-item">
-                <p id="4"></p>
-            </div>
-            <div class="grid-item">
-                <p id="5"></p>
-            </div>
-            <div class="grid-item">
-                <p id="6"></p>
-            </div>
-            <div class="grid-item">
-                <p id="7"></p>
-            </div>
-            <div class="grid-item">
-                <p id="8"></p>
-            </div>
-            <div class="grid-item">
-                <p id="9"></p>
-            </div>
-            <div class="grid-item">
-                <p id="10"></p>
-            </div>
-            <div class="grid-item">
-                <p id="11"></p>
-            </div>
-            <div class="grid-item">
-                <p id="12"></p>
-            </div>
-            <div class="grid-item">
-                <p id="13"></p>
-            </div>
-            <div class="grid-item">
-                <p id="14"></p>
-            </div>
-            <div class="grid-item">
-                <p id="15"></p>
-            </div>
-            <div class="grid-item">
-                <p id="16"></p>
+            
+            <!-- Result Status of the Game -->
+            <div class="result"></div>
+            
+            <!-- The Game Board -->
+            <div class="grid">
+                <div class="grid-item">
+                    <p id="1"></p>
+                </div>
+                <div class="grid-item">
+                    <p id="2"></p>
+                </div>
+                <div class="grid-item">
+                    <p id="3"></p>
+                </div>
+                <div class="grid-item">
+                    <p id="4"></p>
+                </div>
+                <div class="grid-item">
+                    <p id="5"></p>
+                </div>
+                <div class="grid-item">
+                    <p id="6"></p>
+                </div>
+                <div class="grid-item">
+                    <p id="7"></p>
+                </div>
+                <div class="grid-item">
+                    <p id="8"></p>
+                </div>
+                <div class="grid-item">
+                    <p id="9"></p>
+                </div>
+                <div class="grid-item">
+                    <p id="10"></p>
+                </div>
+                <div class="grid-item">
+                    <p id="11"></p>
+                </div>
+                <div class="grid-item">
+                    <p id="12"></p>
+                </div>
+                <div class="grid-item">
+                    <p id="13"></p>
+                </div>
+                <div class="grid-item">
+                    <p id="14"></p>
+                </div>
+                <div class="grid-item">
+                    <p id="15"></p>
+                </div>
+                <div class="grid-item">
+                    <p id="16"></p>
+                </div>
             </div>
         </div>
+
     </div>
+    
     <script src="script.js"></script>
 </body>
 </html>

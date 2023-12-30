@@ -134,7 +134,6 @@ setTimeout(()=>{
 setTimeout(()=>{
     options.push(16)
     options.push(32)
-    options.push(64)
 }, 30000)
 
 // get the available empty indexes
