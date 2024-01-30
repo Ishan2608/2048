@@ -16,10 +16,10 @@ Our 2048 Game Frontend Web Clone comes packed with exciting features to enhance 
 Unlike the original 2048 game, this clone does not support the "Undo" functionality. However, it adds an extra layer of challenge, forcing players to think carefully about each move and plan their strategies meticulously.
 
 <b> Score Tracking (Feature: True) </b>
-Keep track of your progress with the built-in scoring system. Every time you merge two blocks, your score increases. Challenge yourself to achieve the highest score possible and compete with your friends for the top spot on the leaderboard!
+Keep track of your progress with the built-in scoring system. Every time you merge two blocks, your score increases. Challenge yourself to achieve the highest score possible and compete with your friends for the top spot on the leader board!
 
 <b> Dynamic UI Changes (Feature: True) </b>
-As you progress through the game, the user interface dynamically updates to provide a visually appealing and interactive experience. Each move triggers smooth animations and visual cues, making the gameplay engaging and enjoyable.
+As you progress through the game, the user interface dynamically updates to provide a visually appealing and interactive experience. Each move triggers smooth animations and visual cues, making the game play engaging and enjoyable.
 
 # Technologies Used
 HTML, CSS, and JavaScript form the foundation of this frontend web clone, ensuring a seamless and responsive gaming experience across different browsers and devices.
