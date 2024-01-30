@@ -14,12 +14,12 @@
 
 </head>
 <body>
-    <div class="main-container">
+    <main class="main-container">
         <div class="left-column">
-            <h1>
+            <h1 class="txt-heading">
                 Instructions
             </h1>
-            <p>
+            <p class="txt-body">
                 <ul class="instructions">
                     <li class="instruction-point">
                         Use the arrow key to move all the cells Up, Down, Right, and Left.
@@ -45,15 +45,15 @@
 
             <!-- Headers of the Game -->
             <div class="score">
-                <p class="score-title">Score: </p>
-                <p class="score-value">0</p>
+                <p id="score-title" class="txt-heading">Score: </p>
+                <p id="score-value" class="txt-heading">0</p>
             </div>
             
             <!-- Result Status of the Game -->
-            <div class="result"></div>
+            <div id="result" class="txt-body"></div>
             
             <!-- The Game Board -->
-            <div class="grid">
+            <div class="grid txt-body">
                 <div class="grid-item">
                     <p id="1"></p>
                 </div>
@@ -105,7 +105,7 @@
             </div>
         </div>
 
-    </div>
+    </main>
     
     <script src="script.js"></script>
 </body>

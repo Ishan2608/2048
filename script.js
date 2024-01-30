@@ -1,7 +1,7 @@
 // get the game grid
 const gridItems = [...document.querySelectorAll('.grid-item')];
-const score_val = document.querySelector('.score-value');
-const result = document.querySelector('.result');
+const score_val = document.querySelector('#score-value');
+const result = document.querySelector('#result');
 var score = 0;
 var moves = 0;
 var moveFactor = 4
