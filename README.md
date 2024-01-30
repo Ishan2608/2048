@@ -1,11 +1,12 @@
 # 2048 Game Frontend Web Clone
 
 Welcome to the 2048 Game Frontend Web Clone project! This repository hosts a captivating and addictive clone of the famous 2048 puzzle game, built as a web version using modern frontend technologies. In this game, users are challenged to strategically move numbered blocks within a 4x4 grid to achieve the ultimate goal: reaching a total sum of 2048.
+Play the Game [Here](https://ishan2608.github.io/2048/).
 
 # How to Play
 Use the arrow keys (Up, Down, Left, Right) or swipe gestures (for touch-enabled devices) to move the numbered blocks in the desired direction.
 When two blocks with the same number collide, they merge into a single block with their sum.
-The game ends when the user successfully reaches a block with a value of 2048 or when the grid is completely filled, and no more valid moves are possible.
+The game ends when the user successfully reaches a block with a value of 2048 or when the grid is filled, and no more valid moves are possible.
 
 
 # Features
