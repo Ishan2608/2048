@@ -48,6 +48,7 @@ body{
 }
 
 .instruction-point{
+    font-size: 20px;
     margin: 20px 0px;
 }
 
@@ -100,6 +101,9 @@ body{
     .left-column, 
     .right-column{
         min-width: 100%;
+    }
+    .grid{
+        height: auto;
     }
 }
 
