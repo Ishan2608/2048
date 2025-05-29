@@ -8,46 +8,36 @@
     <!-- Importing Google Fonts API Link -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Ubuntu:wght@700&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="./cube.ico">
-    <!-- Importing our CSS File where we write all our styles -->
-    <link rel="stylesheet" href="./style.css">
-
 </head>
 <body>
     <main class="main-container">
         <div class="left-column">
             <h1 class="txt-heading">
-                Instructions
+                Game Instructions
             </h1>
-            <p class="txt-body">
+            <div class="txt-body">
                 <ul class="instructions">
                     <li class="instruction-point">
-                        Use the arrow key to move all the cells Up, Down, Right, and Left.
-
+                        Use the arrow keys to move all tiles Up, Down, Right, and Left across the grid.
                     </li>
                     <li class="instruction-point">
-                        When cells move in a direction and the sibling cells in in that direction have same value in them. They add up.
-
+                        When tiles move in a direction and meet tiles with the same value, they merge and add up.
                     </li>
                     <li class="instruction-point">
-                        Try to reach the number 2048 to win the game.
-
+                        Try to reach the magical number 2048 to win the game and become a champion.
                     </li>
                     <li class="instruction-point">
-                        A new block is created every 8 seconds.
-
+                        A new tile appears every 8 seconds to keep the challenge alive.
                     </li>
                 </ul>
-            </p>
+            </div>
         </div>
-
         <div class="right-column">
-
             <!-- Headers of the Game -->
             <div class="score">
-                <p id="score-title" class="txt-heading">Score: </p>
+                <p id="score-title" class="txt-heading">Score:</p>
                 <p id="score-value" class="txt-heading">0</p>
             </div>
             
@@ -106,7 +96,6 @@
                 </div>
             </div>
         </div>
-
     </main>
     
     <script src="script.js"></script>
